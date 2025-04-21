@@ -9,7 +9,12 @@ public class CreateAccountTests extends TestBase {
     public void newUserRegistrationPositiveTest() {
         int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
         clickOnRegisterLink();
-        fillRegisterForm1(i);
+        fillRegisterForm(new RegistrationUser()
+                .setFirstName("Helen")
+                .setLastName("Straus")
+                .setEmail("test" + i + "@test.com")
+                .setPassword("Aa!12345")
+                .setConfirmPassword("Aa!12345"));
         clickOnRegisterButton();
         Assert.assertTrue(isRegisterPresent());
     }
@@ -17,9 +22,15 @@ public class CreateAccountTests extends TestBase {
     @Test
     public void existedUserRegistrationNegativeTest() {
         clickOnRegisterLink();
-        fillRegisterForm2();
+        fillRegisterForm(new RegistrationUser()
+                .setFirstName("Helen")
+                .setLastName("Straus")
+                .setEmail("hatip45779@insfou.com")
+                .setPassword("Aa!12345")
+                .setConfirmPassword("Aa!12345"));
         clickOnRegisterButton();
-        Assert.assertTrue(isErrorMessagePresent());
+        Assert.assertTrue(isErrorMessageRegistrationPresent());
     }
+
 
 }

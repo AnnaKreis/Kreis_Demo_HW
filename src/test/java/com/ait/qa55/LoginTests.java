@@ -8,24 +8,17 @@ public class LoginTests extends TestBase{
     @Test
     public void loginPositiveTest() {
         clickOnLoginLink();
-        fillLoginForm();
+        fillLoginForm(new User().setEmail("hatip45779@insfou.com").setPassword("Aa!12345"));
         clickOnLoginButton();
         Assert.assertTrue(isLogoutPresent());
-
     }
 
-    //    @Test
-//    public void loginNegativeWithoutEmailTest() {
-//        //click on Login Link
-//        click(By.cssSelector("[href*='/login']"));
-//        //enter Email to mail field
-//        type(By.id("Email"), "hatip45779@insfou.com");
-//        //enter Password to password field
-//        type(By.id("Password"), "Aa!12345");
-//        //click on Login button
-//        click(By.xpath("//input[@class='button-1 login-button']"));
-//        Assert.assertTrue(isElementPresent(By.xpath("//a[text()='Log out']")));
-
-//    }
+    @Test
+    public void loginNegativeWithoutEmailTest() {
+        clickOnLoginLink();
+        fillLoginForm(new User().setPassword("Aa!12345"));
+        clickOnLoginButton();
+        Assert.assertTrue(isErrorMessageLoginPresent());
+    }
 
 }

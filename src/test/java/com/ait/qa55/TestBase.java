@@ -29,9 +29,11 @@ public class TestBase {
     }
 
     public void type(By locator, String text) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        if (text != null) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
     public void click(By locator) {
@@ -41,21 +43,19 @@ public class TestBase {
     public void clickOnRegisterButton() {
         click(By.id("register-button"));
     }
-    public void fillRegisterForm1(int i) {
-        type(By.id("FirstName"), "Helen");
-        type(By.id("LastName"), "Straus");
-//        type(By.id("Email"), "hatip45779@insfou.com");
-        type(By.id("Email"), "test" + i + "@test.com");
-        type(By.id("Password"), "Aa!12345");
-        type(By.id("ConfirmPassword"), "Aa!12345");
+
+    public void fillRegisterForm(RegistrationUser registrationUser) {
+        type(By.id("FirstName"), registrationUser.getFirstName());
+        type(By.id("LastName"), registrationUser.getLastName());
+        type(By.id("Email"), registrationUser.getEmail());
+//        type(By.id("Email"), "test" + i + "@test.com");
+        type(By.id("Password"), registrationUser.getPassword());
+        type(By.id("ConfirmPassword"), registrationUser.getConfirmPassword());
     }
 
-    public void fillRegisterForm2() {
-        type(By.id("FirstName"), "Helen");
-        type(By.id("LastName"), "Straus");
-        type(By.id("Email"), "hatip45779@insfou.com");
-        type(By.id("Password"), "Aa!12345");
-        type(By.id("ConfirmPassword"), "Aa!12345");
+    public void fillLoginForm(User user) {
+        type(By.id("Email"), user.getEmail());
+        type(By.id("Password"), user.getPassword());
     }
 
     public void clickOnRegisterLink() {
@@ -66,7 +66,7 @@ public class TestBase {
         return isElementPresent(By.xpath("//h1[text()='Register']"));
     }
 
-    public boolean isErrorMessagePresent() {
+    public boolean isErrorMessageRegistrationPresent() {
         return isElementPresent(By.xpath("//li[text()='The specified email already exists']"));
     }
 
@@ -78,12 +78,13 @@ public class TestBase {
         click(By.xpath("//input[@class='button-1 login-button']"));
     }
 
-    public void fillLoginForm() {
-        type(By.id("Email"), "hatip45779@insfou.com");
-        type(By.id("Password"), "Aa!12345");
-    }
 
     public void clickOnLoginLink() {
         click(By.cssSelector("[href*='/login']"));
+    }
+
+    public boolean isErrorMessageLoginPresent() {
+        return isElementPresent(By.xpath("//span[text()='Login was unsuccessful. Please correct the errors and try again.']"));
+
     }
 }
