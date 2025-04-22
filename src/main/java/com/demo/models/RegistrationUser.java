@@ -1,4 +1,4 @@
-package com.ait.qa55;
+package com.demo.models;
 
 public class RegistrationUser {
     private String firstName;
