@@ -15,6 +15,17 @@ public class AddItemToCarHelper extends BaseHelper {
         super(driver);
     }
 
+    public void clearCart() {
+        if (isElementPresent(By.cssSelector("span.cart-label"))) {
+            // Переходим в корзину
+            click(By.cssSelector("span.cart-label"));
+            // Удаляем все товары из корзины
+            while (isElementPresent(By.cssSelector("button.remove"))){
+                click(By.cssSelector("button.remove"));
+            }
+        }
+    }
+
     public String getProductNameById(String productId) {
         return driver.findElement(By.cssSelector("div.product-item[data-productid='" + productId + "']"))
                 .findElement(By.cssSelector("h2.product-title a"))

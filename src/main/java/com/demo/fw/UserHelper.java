@@ -19,6 +19,12 @@ public class UserHelper extends BaseHelper {
         return isElementPresent(By.xpath("//a[text()='Log out']"));
     }
 
+    public void logout() {
+        if (isElementPresent(By.xpath("//a[text()='Log out']"))) {
+            click(By.xpath("//a[text()='Log out']"));
+        }
+    }
+
     public void clickOnLoginButton() {
         click(By.xpath("//input[@class='button-1 login-button']"));
     }

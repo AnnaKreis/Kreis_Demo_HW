@@ -15,7 +15,11 @@ public class TestBase {
     public void setUp() {
         app.init();
     }
-
+    @BeforeMethod
+    public void cleanState() {
+        app.getAddItemToCar().clearCart();
+        app.getUser().logout();
+    }
 
 //    @AfterMethod(enabled = false)
     @AfterSuite(enabled = false)
