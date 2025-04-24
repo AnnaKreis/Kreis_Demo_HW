@@ -1,5 +1,6 @@
 package com.demo.tests;
 
+import com.demo.data.RegistrationUserData;
 import com.demo.models.RegistrationUser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,11 +12,11 @@ public class CreateAccountTests extends TestBase {
         int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
         app.getRegistrationUser().clickOnRegisterLink();
         app.getRegistrationUser().fillRegisterForm(new RegistrationUser()
-                .setFirstName("Helen")
-                .setLastName("Straus")
+                .setFirstName(RegistrationUserData.FIRST_NAME)
+                .setLastName(RegistrationUserData.LAST_NAME)
                 .setEmail("test" + i + "@test.com")
-                .setPassword("Aa!12345")
-                .setConfirmPassword("Aa!12345"));
+                .setPassword(RegistrationUserData.PASSWORD)
+                .setConfirmPassword(RegistrationUserData.CONFIRM_PASSWORD));
         app.getRegistrationUser().clickOnRegisterButton();
         Assert.assertTrue(app.getRegistrationUser().isRegisterPresent());
     }
@@ -24,11 +25,11 @@ public class CreateAccountTests extends TestBase {
     public void existedUserRegistrationNegativeTest() {
         app.getRegistrationUser().clickOnRegisterLink();
         app.getRegistrationUser().fillRegisterForm(new RegistrationUser()
-                .setFirstName("Helen")
-                .setLastName("Straus")
-                .setEmail("hatip45779@insfou.com")
-                .setPassword("Aa!12345")
-                .setConfirmPassword("Aa!12345"));
+                .setFirstName(RegistrationUserData.FIRST_NAME)
+                .setLastName(RegistrationUserData.LAST_NAME)
+                .setEmail(RegistrationUserData.EMAIL)
+                .setPassword(RegistrationUserData.PASSWORD)
+                .setConfirmPassword(RegistrationUserData.CONFIRM_PASSWORD));
         app.getRegistrationUser().clickOnRegisterButton();
         Assert.assertTrue(app.getRegistrationUser().isErrorMessageRegistrationPresent());
     }

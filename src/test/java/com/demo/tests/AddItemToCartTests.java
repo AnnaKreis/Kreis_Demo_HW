@@ -1,5 +1,6 @@
 package com.demo.tests;
 
+import com.demo.data.UserData;
 import com.demo.models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -10,7 +11,7 @@ public class AddItemToCartTests extends TestBase {
     @BeforeMethod
     public void preconditions() {
         app.getUser().clickOnLoginLink();
-        app.getUser().fillLoginForm(new User().setEmail("hatip45779@insfou.com").setPassword("Aa!12345"));
+        app.getUser().fillLoginForm(new User().setEmail(UserData.EMAIL).setPassword(UserData.PASSWORD));
         app.getUser().clickOnLoginButton();
     }
 
