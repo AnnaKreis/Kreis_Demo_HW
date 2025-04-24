@@ -9,12 +9,12 @@ public class CreateAccountTests extends TestBase {
 
     @Test(enabled = false)
     public void newUserRegistrationPositiveTest() {
-        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
+//        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
         app.getRegistrationUser().clickOnRegisterLink();
         app.getRegistrationUser().fillRegisterForm(new RegistrationUser()
                 .setFirstName(RegistrationUserData.FIRST_NAME)
                 .setLastName(RegistrationUserData.LAST_NAME)
-                .setEmail("test" + i + "@test.com")
+                .setEmail(RegistrationUserData.getDynamicEmail())
                 .setPassword(RegistrationUserData.PASSWORD)
                 .setConfirmPassword(RegistrationUserData.CONFIRM_PASSWORD));
         app.getRegistrationUser().clickOnRegisterButton();
