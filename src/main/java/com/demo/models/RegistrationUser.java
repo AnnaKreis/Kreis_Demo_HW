@@ -51,4 +51,12 @@ public class RegistrationUser {
     public String getConfirmPassword() {
         return confirmPassword;
     }
+
+    @Override
+    public String toString() {
+        return "RegistrationUser{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
