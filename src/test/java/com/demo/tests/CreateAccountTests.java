@@ -28,21 +28,21 @@ public class CreateAccountTests extends TestBase {
         Assert.assertTrue(app.getRegistrationUser().isRegisterPresent());
     }
 
-    @Test(dataProvider = "registration", dataProviderClass = DataProviders.class)
-    public void newUserRegistrationPositiveFromDataProviderTest(String firstName, String lastName,
-                                                                String email, String password,
-                                                                String confirmPassword) {
-        app.getRegistrationUser().clickOnRegisterLink();
-        app.getRegistrationUser().fillRegisterForm(new RegistrationUser()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-//                .setEmail(RegistrationUserData.getDynamicEmail())
-                .setEmail(email)
-                .setPassword(password)
-                .setConfirmPassword(confirmPassword));
-        app.getRegistrationUser().clickOnRegisterButton();
-        Assert.assertTrue(app.getRegistrationUser().isRegisterPresent());
-    }
+//    @Test(dataProvider = "registration", dataProviderClass = DataProviders.class)
+//    public void newUserRegistrationPositiveFromDataProviderTest(String firstName, String lastName,
+//                                                                String email, String password,
+//                                                                String confirmPassword) {
+//        app.getRegistrationUser().clickOnRegisterLink();
+//        app.getRegistrationUser().fillRegisterForm(new RegistrationUser()
+//                .setFirstName(firstName)
+//                .setLastName(lastName)
+////                .setEmail(RegistrationUserData.getDynamicEmail())
+//                .setEmail(email)
+//                .setPassword(password)
+//                .setConfirmPassword(confirmPassword));
+//        app.getRegistrationUser().clickOnRegisterButton();
+//        Assert.assertTrue(app.getRegistrationUser().isRegisterPresent());
+//    }
 
     @Test(dataProvider = "registrationWithCsv", dataProviderClass = DataProviders.class)
     public void newUserRegistrationPositiveFromDataProviderWithCsvFileTest(RegistrationUser registrationUser) {

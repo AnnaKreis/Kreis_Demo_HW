@@ -12,28 +12,52 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DataProviders {
-    @DataProvider
-    public Iterator<Object[]> registration() {
-        List<Object[]> list = new ArrayList<>();
-        list.add(new Object[]{"Olga", "Straus", "hatip457@insfou.com", "Ab!122aaaaaaaaa222345", "Ab!122aaaaaaaaa222345"});
-        list.add(new Object[]{"Olga", "Straus", "hatip457@i.com", "Ab!1111112345", "Ab!1111112345"});
-        list.add(new Object[]{"Olga", "Straus", "hatip457@insfou.com", "Ab!1ab", "Ab!1ab"});
-        return list.iterator();
-    }
+//    @DataProvider
+//    public Iterator<Object[]> registration() {
+//        List<Object[]> list = new ArrayList<>();
+//        list.add(new Object[]{"Olga", "Straus", "hatip457@insfou.com", "Ab!122aaaaaaaaa222345", "Ab!122aaaaaaaaa222345"});
+//        list.add(new Object[]{"Olga", "Straus", "hatip457@i.com", "Ab!1111112345", "Ab!1111112345"});
+//        list.add(new Object[]{"Olga", "Straus", "hatip457@insfou.com", "Ab!1ab", "Ab!1ab"});
+//        return list.iterator();
+//    }
+
+//    @DataProvider
+//    public Iterator<Object[]> registrationWithCsv() throws IOException {
+//        List<Object[]> list = new ArrayList<>();
+//        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/registration.csv")));
+//        String line = reader.readLine();
+//        while (line != null) {
+//            String[] split = line.split(",");
+//            list.add(new Object[]{new RegistrationUser().setFirstName(split[0])
+//                    .setLastName(split[1]).setEmail(split[2]).setPassword(split[3])
+//                    .setConfirmPassword(split[4])});
+//            line = reader.readLine();
+//        }
+//        return list.iterator();
+//    }
 
     @DataProvider
     public Iterator<Object[]> registrationWithCsv() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/registration.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/registration.csv"));
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(",");
-            list.add(new Object[]{new RegistrationUser().setFirstName(split[0])
-                    .setLastName(split[1]).setEmail(split[2]).setPassword(split[3])
-                    .setConfirmPassword(split[4])});
-            line = reader.readLine();
+            String dynamicEmail = split[2].split("@")[0] + ((System.currentTimeMillis() / 1000) % 3600) + "@test.com";
+            EmailLogger.log(split[0], split[1], dynamicEmail, split[3], split[4]);
+            RegistrationUser user = new RegistrationUser()
+                    .setFirstName(split[0])
+                    .setLastName(split[1])
+                    .setEmail(dynamicEmail)
+                    .setPassword(split[3])
+                    .setConfirmPassword(split[4]);
+
+            list.add(new Object[]{user});
+            line = reader.readLine(); // считываем следующую строку
         }
+
+        reader.close();
         return list.iterator();
     }
-
 }
+
