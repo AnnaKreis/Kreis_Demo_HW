@@ -17,9 +17,7 @@ public class AddItemToCarHelper extends BaseHelper {
 
     public void clearCart() {
         if (isElementPresent(By.cssSelector("span.cart-label"))) {
-            // Переходим в корзину
             click(By.cssSelector("span.cart-label"));
-            // Удаляем все товары из корзины
             while (isElementPresent(By.cssSelector("button.remove"))){
                 click(By.cssSelector("button.remove"));
             }

@@ -53,7 +53,7 @@ public class DataProviders {
                     .setConfirmPassword(split[4]);
 
             list.add(new Object[]{user});
-            line = reader.readLine(); // считываем следующую строку
+            line = reader.readLine();
         }
 
         reader.close();
